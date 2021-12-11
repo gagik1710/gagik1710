@@ -1,9 +1,9 @@
 package com.demo.notes.service;
 
 import com.demo.notes.domain.User;
-import com.demo.notes.entity.UserEntity;
 import com.demo.notes.mapper.UserMapper;
 import com.demo.notes.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +33,8 @@ public class UserService implements CRUDService<User> {
     @Override
     public User saveOrUpdate(User domainObject) {
         final var userEntity = UserMapper.INSTANCE.domainToEntity(domainObject);
+        //ToDo improve
+        userEntity.setPassword(new BCryptPasswordEncoder().encode(userEntity.getPassword()));
         final var updatedEntity = userRepository.save(userEntity);
         return UserMapper.INSTANCE.entityToDomain(updatedEntity);
     }

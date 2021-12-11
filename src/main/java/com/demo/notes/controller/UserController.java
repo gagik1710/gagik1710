@@ -24,4 +24,15 @@ public class UserController {
     public ResponseEntity<User> create(@RequestBody User user) {
         return ResponseEntity.ok(userService.saveOrUpdate(user));
     }
+
+    @PutMapping
+    ResponseEntity<User> update(@RequestBody User user) {
+        return ResponseEntity.ok(userService.saveOrUpdate(user));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }
