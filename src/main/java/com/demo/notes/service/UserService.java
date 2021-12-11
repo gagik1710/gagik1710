@@ -1,6 +1,7 @@
 package com.demo.notes.service;
 
 import com.demo.notes.domain.User;
+import com.demo.notes.entity.UserEntity;
 import com.demo.notes.mapper.UserMapper;
 import com.demo.notes.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class UserService implements CRUDService<User> {
 
     @Override
     public List<User> listAll() {
-        return null;
+        return userRepository.findAll()
+                .stream()
+                .map(UserMapper.INSTANCE::entityToDomain)
+                .toList();
     }
 
     @Override
@@ -28,11 +32,13 @@ public class UserService implements CRUDService<User> {
 
     @Override
     public User saveOrUpdate(User domainObject) {
-        return UserMapper.INSTANCE.entityToDomain(userRepository.save(UserMapper.INSTANCE.domainToEntity(domainObject)));
+        final var userEntity = UserMapper.INSTANCE.domainToEntity(domainObject);
+        final var updatedEntity = userRepository.save(userEntity);
+        return UserMapper.INSTANCE.entityToDomain(updatedEntity);
     }
 
     @Override
     public void delete(Long id) {
-
+        userRepository.deleteById(id);
     }
 }

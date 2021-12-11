@@ -1,5 +1,6 @@
 package com.demo.notes.entity;
 
+import com.demo.notes.domain.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,4 +32,6 @@ public class UserEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userID")
     private List<NoteEntity> notes;
+
+    private Role role;
 }
