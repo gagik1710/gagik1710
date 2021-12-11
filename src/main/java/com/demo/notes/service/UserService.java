@@ -1,12 +1,21 @@
 package com.demo.notes.service;
 
 import com.demo.notes.domain.User;
+import com.demo.notes.mapper.UserMapper;
+import com.demo.notes.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService implements CRUDService<User>{
+public class UserService implements CRUDService<User> {
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public List<User> listAll() {
         return null;
@@ -14,12 +23,12 @@ public class UserService implements CRUDService<User>{
 
     @Override
     public User getById(Long id) {
-        return null;
+        return UserMapper.INSTANCE.entityToDomain(userRepository.findById(id).get());
     }
 
     @Override
     public User saveOrUpdate(User domainObject) {
-        return null;
+        return UserMapper.INSTANCE.entityToDomain(userRepository.save(UserMapper.INSTANCE.domainToEntity(domainObject)));
     }
 
     @Override
