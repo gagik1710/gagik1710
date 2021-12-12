@@ -3,6 +3,7 @@ package com.demo.notes.service;
 import com.demo.notes.domain.User;
 import com.demo.notes.mapper.UserMapper;
 import com.demo.notes.repository.UserRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserService implements CRUDService<User> {
     }
 
     @Override
-    public List<User> listAll() {
+    public List<User> listAll(PageRequest of) {
         return userRepository.findAll()
                 .stream()
                 .map(UserMapper.INSTANCE::entityToDomain)

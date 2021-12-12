@@ -12,6 +12,13 @@ spring:
       ddl-auto: update
       use-new-id-generator-mappings: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    url: jdbc:postgresql://localhost:5432/demodb
+    schemas: public
+    user: "postgres"
+    password: "password"
+    enabled: false
+    baseline-on-migrate: true
 demo:
   app:
     jwtSecret: demoappdisqo
