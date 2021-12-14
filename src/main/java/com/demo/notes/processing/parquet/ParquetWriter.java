@@ -3,7 +3,6 @@ package com.demo.notes.processing.parquet;
 import com.demo.notes.configuration.parquet.CustomParquetWriter;
 import com.demo.notes.domain.DataTypeEnum;
 import com.demo.notes.processing.PathUtils;
-import lombok.RequiredArgsConstructor;
 import org.apache.hadoop.fs.Path;
 import org.apache.parquet.hadoop.metadata.CompressionCodecName;
 import org.apache.parquet.schema.MessageType;
@@ -12,8 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
@@ -38,17 +36,22 @@ public class ParquetWriter {
         final var outputFilePath = PathUtils.getRootPathFor(PathUtils.FileType.PARQUET) + System.currentTimeMillis() + ".parquet";
         final var outputParquetFile = new File(outputFilePath);
         final var path = new Path(outputParquetFile.toURI().toString());
+        logger.info("The path is " + path);
         return new CustomParquetWriter(path, schema, false, CompressionCodecName.SNAPPY);
     }
 
     private MessageType getSchemaForParquetFile(DataTypeEnum dataType) throws IOException {
         final var resource = getFileByType(dataType);
-        final var rawSchema = new String(Files.readAllBytes(resource.toPath()));
+        final var rawSchema = new String(resource);
         return MessageTypeParser.parseMessageType(rawSchema);
     }
 
-    private File getFileByType(DataTypeEnum dataType) {
-        return dataType.equals(DataTypeEnum.NOTE) ? new File(getClass().getResource("/schemas/note.schema").getFile()) :
-                new File(getClass().getResource("/schemas/user.schema").getFile());
+    private byte[] getFileByType(DataTypeEnum dataType) {
+        try {
+            return getClass().getResourceAsStream(dataType.equals(DataTypeEnum.NOTE) ? "/schemas/note.schema" : "/schemas/user.schema").readAllBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

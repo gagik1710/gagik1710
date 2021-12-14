@@ -11,7 +11,7 @@ public class PathUtils {
 
     public static String getRootPathFor(FileType fileType) {
         Path homePath = Paths.get(
-                System.getenv("HOMEPATH") +
+                FileSystems.getDefault().getRootDirectories().iterator().next() +
                         separator +
                         "demo" +
                         separator +
