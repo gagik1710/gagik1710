@@ -1,0 +1,57 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "john@smith.com",
+  "password": "1234"
+}
+
+###
+GET http://localhost:8080/note/all?page=0&size=5
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTYzOTU4MDUwMCwidXNlcklEIjoxLCJlbWFpbCI6ImpvaG5Ac21pdGguY29tIn0.mXCBkQAS577p9t6hncfebpgwZ6SsvAUu1eI4tt0-RCA
+
+###
+PUT http://localhost:8080/note
+Content-Type: application/json
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTYzOTU4MDUwMCwidXNlcklEIjoxLCJlbWFpbCI6ImpvaG5Ac21pdGguY29tIn0.mXCBkQAS577p9t6hncfebpgwZ6SsvAUu1eI4tt0-RCA
+
+{
+  "id": 1,
+  "title": "My Edited Title",
+  "note": "My Edited note"
+}
+
+###
+GET http://localhost:8080/note/1
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTYzOTU4MDUwMCwidXNlcklEIjoxLCJlbWFpbCI6ImpvaG5Ac21pdGguY29tIn0.mXCBkQAS577p9t6hncfebpgwZ6SsvAUu1eI4tt0-RCA
+
+###
+POST http://localhost:8080/note
+Content-Type: application/json
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTYzOTU4MDUwMCwidXNlcklEIjoxLCJlbWFpbCI6ImpvaG5Ac21pdGguY29tIn0.mXCBkQAS577p9t6hncfebpgwZ6SsvAUu1eI4tt0-RCA
+
+{
+  "title": "My NEW  Custom Title",
+  "note": "My NEW Custom note"
+}
+
+###
+GET http://localhost:8080/note/1
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImV4cCI6MTYzOTU4MDUwMCwidXNlcklEIjoxLCJlbWFpbCI6ImpvaG5Ac21pdGguY29tIn0.mXCBkQAS577p9t6hncfebpgwZ6SsvAUu1eI4tt0-RCA
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "1234"
+}
+
+###
+GET http://localhost:8080/job/json
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Mzk1ODExNDIsInVzZXJJRCI6NCwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20ifQ.2Q5RGiTxRH71WLKPs1MRDbS-5TPs8lCZ4JuEf_MiVAY
+
+###
+GET http://localhost:8080/job/parquet
+Cookie: Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Mzk1ODExNDIsInVzZXJJRCI6NCwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20ifQ.2Q5RGiTxRH71WLKPs1MRDbS-5TPs8lCZ4JuEf_MiVAY
