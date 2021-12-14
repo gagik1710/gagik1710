@@ -1,4 +1,4 @@
-package com.demo.notes.parquet;
+package com.demo.notes.configuration.parquet;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.parquet.hadoop.ParquetWriter;

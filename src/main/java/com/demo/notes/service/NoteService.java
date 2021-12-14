@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class NoteService implements CRUDService<Note> {
         return noteRepository.findAllByUserID(userDetails.getId(), pageRequest)
                 .stream()
                 .map(NoteMapper.INSTANCE::entityToDomain)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

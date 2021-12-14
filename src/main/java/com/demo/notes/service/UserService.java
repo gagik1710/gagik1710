@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements CRUDService<User> {
@@ -23,7 +24,7 @@ public class UserService implements CRUDService<User> {
         return userRepository.findAll()
                 .stream()
                 .map(UserMapper.INSTANCE::entityToDomain)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

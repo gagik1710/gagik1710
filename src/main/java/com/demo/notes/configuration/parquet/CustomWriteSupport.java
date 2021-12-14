@@ -1,4 +1,4 @@
-package com.demo.notes.parquet;
+package com.demo.notes.configuration.parquet;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.parquet.column.ColumnDescriptor;
@@ -23,7 +23,7 @@ public class CustomWriteSupport extends WriteSupport<List<String>> {
 
     @Override
     public WriteContext init(Configuration config) {
-        return new WriteContext(schema, new HashMap<String, String>());
+        return new WriteContext(schema, new HashMap<>());
     }
 
     @Override

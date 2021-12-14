@@ -3,7 +3,6 @@ package com.demo.notes.configuration.security;
 import com.demo.notes.configuration.security.filter.JwtAuthenticationFilter;
 import com.demo.notes.configuration.security.filter.JwtAuthorizationFilter;
 import com.demo.notes.configuration.security.utils.JwtUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/**").hasAuthority("admin")
                 .antMatchers("/note/**").hasAnyAuthority("user", "admin")
+                .antMatchers("/job/**").hasAnyAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil))
